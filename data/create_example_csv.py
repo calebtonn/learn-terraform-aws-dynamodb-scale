@@ -6,7 +6,12 @@ import csv
 import random
 import time
 import uuid
+import MySQLdb
 
+db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                     user="john",         # your username
+                     passwd="megajonhy",  # your password
+                     db="jonhydb")        # name of the data base
 
 def gen_uuids(count):
     for i in range(count):
@@ -70,7 +75,6 @@ with open("example_environments.csv", "w") as csvfile:
 
     for userId in gen_uuids(4):
         for deviceId in gen_uuids(2):
-
             geoLocation = random_geoLocation()
 
             for eventId in gen_uuids(10):
