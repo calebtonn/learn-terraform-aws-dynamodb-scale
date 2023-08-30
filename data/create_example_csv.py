@@ -1,4 +1,4 @@
-#/usr/bin/python3
+# /usr/bin/python3
 
 # Simple script to generate random environmental data
 
@@ -7,12 +7,18 @@ import random
 import time
 import uuid
 
+
 def gen_uuids(count):
     for i in range(count):
         yield uuid.uuid4()
 
+
 def random_geoLocation():
-    locations = {"TX": ["Austin", "San Antonio"], "CA": ["Berkely", "Las Angeles", "San Diego"] , "VT": ["Burlington", "St. Albans"]}
+    locations = {
+        "TX": ["Austin", "San Antonio"],
+        "CA": ["Berkely", "Las Angeles", "San Diego"],
+        "VT": ["Burlington", "St. Albans"],
+    }
 
     state = random.choice(list(locations))
 
@@ -20,28 +26,44 @@ def random_geoLocation():
         "planet": "Earth",
         "country": "US",
         "state": state,
-        "city": random.choice(locations[state])
+        "city": random.choice(locations[state]),
     }
 
     return "{planet}-{country}-{state}-{city}".format(**loc)
 
+
 def random_time():
-    return int(time.time()) - random.randint(100,10000)
+    return int(time.time()) - random.randint(100, 10000)
+
 
 def random_tempC():
     return round(random.random() * 120, 2)
 
+
 def random_humidityPct():
-    return random.randint(0,100)
+    return random.randint(0, 100)
+
 
 def random_pressurePa():
-    return random.randint(100000,105000)
+    return random.randint(100000, 105000)
+
 
 def random_expiry(startEpochS):
-    return random.choice((0,0,0,startEpochS + random.randint(60,600)))
+    return random.choice((0, 0, 0, startEpochS + random.randint(60, 600)))
 
-with open('example_environments.csv', 'w') as csvfile:
-    fields = ['userId', 'deviceId', 'eventId', 'geoLocation', 'epochS', 'expiry', 'tempC', 'humidityPct', 'pressurePa']
+
+with open("example_environments.csv", "w") as csvfile:
+    fields = [
+        "userId",
+        "deviceId",
+        "eventId",
+        "geoLocation",
+        "epochS",
+        "expiry",
+        "tempC",
+        "humidityPct",
+        "pressurePa",
+    ]
     envwriter = csv.writer(csvfile)
 
     envwriter.writerow(fields)
@@ -58,4 +80,16 @@ with open('example_environments.csv', 'w') as csvfile:
                 humidityPct = random_humidityPct()
                 pressurePa = random_pressurePa()
 
-                envwriter.writerow([userId, deviceId, eventId, geoLocation, epochS, expiry, tempC, humidityPct, pressurePa])
+                envwriter.writerow(
+                    [
+                        userId,
+                        deviceId,
+                        eventId,
+                        geoLocation,
+                        epochS,
+                        expiry,
+                        tempC,
+                        humidityPct,
+                        pressurePa,
+                    ]
+                )
