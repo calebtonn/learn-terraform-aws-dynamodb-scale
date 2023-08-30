@@ -8,10 +8,13 @@ import time
 import uuid
 import MySQLdb
 
-db = MySQLdb.connect(host="localhost",    # your host, usually localhost
-                     user="john",         # your username
-                     passwd="megajonhy",  # your password
-                     db="jonhydb")        # name of the data base
+db = MySQLdb.connect(
+    host="localhost",  # your host, usually localhost
+    user="john",  # your username
+    passwd="megajonhy",  # your password
+    db="jonhydb",
+)  # name of the data base
+
 
 def gen_uuids(count):
     for i in range(count):
